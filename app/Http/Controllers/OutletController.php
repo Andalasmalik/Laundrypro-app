@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 
-class outlet extends Controller
+class OutletController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class outlet extends Controller
      */
     public function index()
     {
-        //
+        return view('outlet.index', [
+            'tb_outlet'=>Outlet::all()
+        ]);
     }
 
     /**
@@ -34,7 +37,15 @@ class outlet extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request ->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required'
+            ]);
+        
+           $input = Outlet::create($validated);
+    
+          if($input) return redirect('outlet')->with('susces', 'Data berhasil diinput');
     }
 
     /**
@@ -54,9 +65,11 @@ class outlet extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($Outlet)
     {
-        //
+        return view('outlet.index', [
+            'tb_outlet'=> $Outlet
+        ]);
     }
 
     /**
@@ -68,7 +81,16 @@ class outlet extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required'
+            ]);
+
+            $input = Outlet::where('id', $id)
+                    ->update($validated);
+                    
+            if($input) return redirect('outlet')->with('susces', 'Data berhasil diinput');
     }
 
     /**
@@ -77,8 +99,10 @@ class outlet extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($Outlet)
     {
-        //
+        Outlet::destroy($Outlet);
+
+        return redirect('/outlet');
     }
 }
