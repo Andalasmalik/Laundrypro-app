@@ -4,7 +4,7 @@
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="malikoutlet">Modal title</h5>
+        <h5 class="modal-title" id="malikoutlet">Tambah Data Outlet</h5>
         </div>
         <div class="modal-body">
             <form action="outlet" method="post">
