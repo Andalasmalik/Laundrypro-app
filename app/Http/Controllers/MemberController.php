@@ -14,7 +14,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        
+        return view('member.index', [
+            'tb_member'=>Member::all()
+        ]); 
     }
 
     /**
@@ -35,7 +37,16 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'tlp' => 'required'
+            ]);
         
+           $input = Member::create($validated);
+    
+          if($input) return redirect('#')->with('susces', 'Data berhasil diinput');
     }
 
     /**
@@ -55,9 +66,11 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($Member)
     {
-        
+        return view('member.index', [
+            'tb_member'=> $Member
+        ]);
     }
 
     /**
@@ -69,7 +82,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request ->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'tlp' => 'required'
+            ]);
+
+            $input = Member::where('id', $id)
+                    ->update($validated);
+                    
+            if($input) return redirect('member')->with('susces', 'Data berhasil diinput');
     }
 
     /**
@@ -78,8 +101,10 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($Member)
     {
-        //
+        Member::destroy($Member);
+
+        return redirect('/member');
     }
 }
