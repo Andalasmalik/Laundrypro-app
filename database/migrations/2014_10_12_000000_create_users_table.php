@@ -19,13 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('nama', 100);
             $table->string('username', 30);
             $table->text('password');
-            $table->unsignedBigInteger('id_outlet');
+            $table->foreignId('outlet_id');
             $table->enum('role', [
                 'admin', 'kasir', 'owner'
             ]);
             $table->timestamps();
 
-            $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
+            // $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
         });
     }
 
