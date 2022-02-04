@@ -83,7 +83,13 @@
                                                     </div> 
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Jenis</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" name="jenis" value="{{ old('jenis', $p->jenis) }}">
+                                                        <select id="jenis" name="jenis" required="required" class="form-control" value="{{ old('jenis', $p->jenis) }}" >
+                                                            <option>kiloan</option>
+                                                            <option>selimut</option>
+                                                            <option>bed_cover</option>
+                                                            <option>kaos</option>
+                                                            <option>kain</option>
+                                                          </select>
                                                     </div> 
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Nama Paket</label>
