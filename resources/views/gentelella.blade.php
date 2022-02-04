@@ -57,7 +57,7 @@
                         <li><a href="/outlet">Outlet</a></li>
                         <li><a href="/paket">Paket</a></li>
                         <li><a href="/member">Member</a></li>
-                        <li><a href="/">User</a></li>
+                        <li><a href="/user">User</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
