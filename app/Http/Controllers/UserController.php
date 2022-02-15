@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Outlet;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,7 +17,8 @@ class UserController extends Controller
     public function index()
     {
         return view('user.index', [
-            'users' => User::all()
+            'users' => User::all(),
+            'tb_outlet'=> Outlet::all()
         ]);
     }
 
@@ -37,7 +40,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request ->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'outlet_id' => 'required',
+            'role' => 'required'
+            ]);
+            
+            $validated['password']=Hash::make($validated['password']);
+            
+           $input = User::create($validated);
+    
+          if($input) return redirect('#')->with('susces', 'Data berhasil diinput');
     }
 
     /**
@@ -57,9 +72,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($users)
     {
-        //
+        return view('user.index', [
+            'user'=> $users
+        ]);
     }
 
     /**
@@ -71,7 +88,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request ->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'outlet_id' => 'required',
+            'role' => 'required'
+            ]);
+
+
+            $input = User::where('id', $id)
+                    ->update($validated);
+                    
+            if($input) return redirect('user')->with('susces', 'Data berhasil diinput');
     }
 
     /**

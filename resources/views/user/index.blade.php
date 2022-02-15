@@ -1,6 +1,12 @@
 @extends('gentelella')
 
+{{-- @section('sidebar')
+    @include('side-content.side-bar')
+@endsection --}}
+
+
 @section('content')
+@include('user.modal-user')
     <div class="card">
     <div class="card-header">
         <h3 class="card-litle">User</h3>
@@ -9,8 +15,8 @@
     </div>
     <div class="card-body">
         <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalikOutlet">
-                Tambah Data Pelanggan
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalikUser">
+                Tambah Data User
             </button>
         </div>
     
@@ -23,8 +29,8 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Id Outlet</th>
+                            <th scope="col">Email</th>
+                            <th scope="col"> Outlet</th>
                             <th scope="col">Role</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -34,8 +40,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{$u->nama}}</td>
-                            <td>{{$u->username}}</td>
-                            <td>{{$u->outlet_id}}</td>
+                            <td>{{$u->email}}</td>
+                            <td>{{$u->outlet->nama}}</td>
                             <td>{{$u->role}}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $u->id }}">
@@ -53,17 +59,26 @@
                                                 @method('PUT')
                                             @csrf
                                                 <div class="mb-3">
-                                                     <label for="exampleInputEmail1" class="form-label">nama</label>
-                                                     <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="{{ old('nama', $u->nama) }}">
-                                                </div> 
-                                                <div class="mb-3">
-                                                     <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                                     <input type="text" class="form-control" id="exampleInputEmail1" name="alamat" value="{{ old('alamat', $u->alamat) }}">
-                                                </div> 
-                                                <div class="mb-3">
-                                                     <label for="exampleInputEmail1" class="form-label">tlp</label>
-                                                     <input type="text" class="form-control" id="exampleInputEmail1" name="tlp" value="{{ old('tlp', $u->tlp) }}">
-                                                </div> 
+                                                    <label for="exampleInputEmail1" class="form-label">Nama </label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="{{ old('nama', $u->nama) }}">
+                                                  </div> 
+                                                  <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" name="email" value="{{ old('email', $u->email) }}">
+                                                  </div> 
+                                                  <div class="mb-3">
+                                                      <label for="exampleInputEmail1" class="form-label">Password</label>
+                                                      <input type="password" class="form-control mb-2"  id="myInput" name="password" value="{{ old('password', $u->password) }}">
+                                                      <input type="checkbox" onclick="myFunction()"> Show 
+                                                  </div> 
+                                                  <div class="mb-3">
+                                                      <label for="exampleInputEmail1" class="form-label">Id Outlet</label>
+                                                      <input type="text" class="form-control" id="exampleInputEmail1" name="outlet_id" value="{{ old('outlet_id', $u->outlet_id) }}">
+                                                  </div> 
+                                                  <div class="mb-3">
+                                                      <label for="exampleInputEmail1" class="form-label">Role</label>
+                                                      <input type="text" class="form-control" id="exampleInputEmail1" name="role" value="{{ old('role', $u->role) }}">
+                                                  </div> 
                                             
                                             
                                         </div>
@@ -126,40 +141,10 @@
     {{-- /.card-footer --}}
     </div>
 
-@include('outlet.modal-outlet')
+{{-- @include('user.modal-user') --}}
 @endsection
 
 @push('script')
     <script>
-        $(function(){
-        // Data Table
-        $('#table').DataTable()
-
-        // Alert
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-            $("success-alert").slideUp(500);
-        });
-
-        $("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
-            $("success-alert").slideUp(500);
-        });
-
-        // Delete Alert
-        $('.delete-outlet').click(function(e){
-            e.preventDefault()
-            let data = $(this).closest('tr').find('td:eq(4)').text()
-            swal({
-                title: "Apakah Kamu Yakin?", 
-                text: "Yakin Ingin Menghapus Data yang anda pilih?",
-                icon: "warning",
-                buttons:true,
-                dangerMode: true,
-            })
-            .then((req) => {
-                if(req) $(e.target).closest('form').submit()
-                else swal.close()
-            })
-        })
-}};
     </script>
 @endpush

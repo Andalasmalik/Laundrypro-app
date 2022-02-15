@@ -1,6 +1,7 @@
 @extends('gentelella')
 
-        @section('content')
+ @section('content')
+@include('member.modal-member')
             <div class="card">
             <div class="card-header">
                 <h3 class="card-litle">Member</h3>
@@ -159,5 +160,5 @@
             {{-- /.card-footer --}}
             </div>
 
-        @include('member.modal-member')
+        
         @endsection

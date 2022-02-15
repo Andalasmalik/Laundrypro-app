@@ -47,38 +47,14 @@
 
                 <br />
 
-                <!-- sidebar menu -->
-                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                <div class="menu_section">
-                    <h3>General</h3>
-                    <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> E-Laundry <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                        <li><a href="/outlet">Outlet</a></li>
-                        <li><a href="/paket">Paket</a></li>
-                        <li><a href="/member">Member</a></li>
-                        <li><a href="/user">User</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                        <li><a href="form.html">HEHEHEHE</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                        <li><a href="tables.html">HEHEHEHE</a></li>
-                        </ul>
-                    </li>
-                    
-                    </ul>
-                </div>
-                <div class="menu_section">
-                </div>
+                @if(auth()->user()->role == 'admin')
+                    @include('side-content.sidebar-admin')
+                @elseif(auth()->user()->role == 'kasir')
+                    @include('side-content.sidebar-kasir')
+                @elseif(auth()->user()->role == 'owner')
+                    @include('side-content.sidebar-owner')
 
-                </div>
-                <!-- /sidebar menu -->
+                @endif
 
                 <!-- /menu footer buttons -->
                 <div class="sidebar-footer hidden-small">
@@ -245,7 +221,7 @@
                         
                         <!-- Content Dari Index -->
                         @yield('content')
-
+                        
                     </div>
                     </div>
                 </div>
@@ -257,7 +233,7 @@
             <!-- footer content -->
             <footer>
             <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                Template gantelella GG Gaming <a href="https://colorlib.com">Colorlib</a>
             </div>
             <div class="clearfix"></div>
             </footer>

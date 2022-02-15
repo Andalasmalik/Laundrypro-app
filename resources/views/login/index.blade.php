@@ -32,7 +32,7 @@ a.dataLayer=a.dataLayer||[],a.zaraz.track=(e,t)=>{for(key in a.zarazData.tracks.
     @csrf
 <h1>Login Form</h1>
 <div>
-<input type="text" class="form-control" placeholder="username" required="" name="username" />
+<input type="text" class="form-control" placeholder="email" required="" name="email" />
 </div>
 <div>
 <input type="password" class="form-control" placeholder="Password" required="" name="password" />

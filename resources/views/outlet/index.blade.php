@@ -1,6 +1,11 @@
 @extends('gentelella')
 
+{{-- @section('sidebar')
+    @include('side-content.side-bar')
+@endsection --}}
+
 @section('content')
+@include('outlet.modal-outlet')
     <div class="card">
     <div class="card-header">
         <h3 class="card-litle">Outlet</h3>
@@ -149,7 +154,7 @@
     {{-- /.card-footer --}}
     </div>
 
-@include('outlet.modal-outlet')
+
 @endsection
 
 @push('script')

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paket;
+use App\Models\Outlet;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -13,7 +16,14 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        // $data['paket'] = Paket::all();
+        // $data['member'] = Member::all();
+        // $data['outlet'] = Outlet::all();
+        return view('transaksi.index', [
+            'tb_paket'=>Paket::all(),
+            'tb_member'=>Member::all(),
+            'tb_outlet'=>Outlet::all()
+        ]);
     }
 
     /**

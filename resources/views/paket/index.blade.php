@@ -1,6 +1,7 @@
 @extends('gentelella')
 
-    @section('content')
+@section('content')
+    @include('paket.modal-paket')
         <div class="card">
         <div class="card-header">
             <h3 class="card-litle">Paket</h3>
@@ -58,7 +59,7 @@
                                 @foreach ($tb_paket as $p )
                             <tr>    
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{$p->id_outlet}}</td>
+                                <td>{{$p->outlet->nama}}</td>
                                 <td>{{$p->jenis}}</td>
                                 <td>{{$p->nama_paket}}</td>
                                 <td>{{$p->harga}}</td>
@@ -161,5 +162,5 @@
         {{-- /.card-footer --}}
         </div>
 
-    @include('paket.modal-paket')
+    
     @endsection

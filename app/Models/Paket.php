@@ -11,6 +11,11 @@ class Paket extends Model
 
     public $incrementing = true;
     protected $table = 'tb_paket';
-    protected $fillable = [ 'id_outlet', 'jenis', 'nama_paket', 'harga'];
+    protected $fillable = [ 'outlet_id', 'jenis', 'nama_paket', 'harga'];
     public $timestamps = false;
+
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class);
+    }
 }

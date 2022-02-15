@@ -6,6 +6,7 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransaksiController;
 
 
 Route::get('/home', function(){
@@ -27,3 +28,4 @@ Route::resource('paket', PaketController::class);
 Route::resource('outlet', OutletController::class);
 Route::resource('member', MemberController::class);
 Route::resource('user', UserController::class);
+Route::resource('transaksi', TransaksiController::class);
