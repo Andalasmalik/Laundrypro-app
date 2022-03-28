@@ -1,6 +1,6 @@
 @extends('gentelella')
-
  @section('content')
+ @include('member.import')
 @include('member.modal-member')
             <div class="card">
             <div class="card-header">
@@ -13,33 +13,11 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalikMember">
                         Tambah Data Member
                     </button>
+                    <a href="Export/MemberExport" class="btn btn-success" > 
+                        <i class="">Export Excel </i>
+                    </a>
+                    <button class="btn btn-warning" data-target="#importExcel" data-toggle="modal">Import Excel </button>
                 </div>
-                
-                    {{-- <div style="margin-top:20px">
-                        @if(session('success'))
-                        <div class="alert alert-danger" role="alert" id="success-alert">
-                        {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-
-                        @endif
-
-                        @if ($errors->any())
-                        <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        </div>
-                        
-                        @endif
-                    </div> --}}
 
                     <br>
                     <div class="row">
@@ -149,7 +127,7 @@
                                             @csrf
                                             @method('DELETE')
                                             {{-- <input type="hidden" name="_method" value="Delete"> --}}
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="delete btn btn-danger">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

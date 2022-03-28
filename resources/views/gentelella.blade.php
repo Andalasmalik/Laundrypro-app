@@ -113,7 +113,7 @@
                         <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                         <li class="nav-item">
                             <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                            <span class="image"><img src="" alt="Profile Image" /></span>
                             <span>
                                 <span>John Smith</span>
                                 <span class="time">3 mins ago</span>
@@ -258,6 +258,23 @@
 
         <script src="{{ asset('assets') }}/vendors/datatables.net/js/jquery.dataTables.js"></script>
         <script src="{{ asset('assets') }}/vendors/switchery/dist/switchery.min.js"></script>
+        <script>
+            $('.delete').click(function(e){
+                e.preventDefault()
+                let data = $(this).closest('form').find('buttom').text()
+                swal({
+                    title: "Apakah Kamu Yakin?", 
+                    text: "Data ini Ingin Dihapus?",
+                    icon: "warning",
+                    buttons:true,
+                    dangerMode: true,
+                })
+                .then((req) => {
+                    if(req) $(e.target).closest('form').submit()
+                    else swal.close()
+                })
+            })
+        </script>
 
         @stack('script')
 

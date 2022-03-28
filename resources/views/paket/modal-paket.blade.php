@@ -1,6 +1,6 @@
 
   <!-- Modal -->
-  <div class="modal fade" id="MalikPaket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="MalikPaket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -11,8 +11,8 @@
             @csrf
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Id Outlet </label>
-                  <select id="jenis" name="jenis" required="required" class="form-control" >
-                    <option>{{ Auth::user()->outlet->nama }}</option>
+                  <select id="jenis" name="outlet_id" required="required" class="form-control" >
+                    <option value="{{ Auth::user()->outlet_id }}">{{ Auth::user()->outlet->nama }}</option>
                   </select>
                 </div> 
                 <div class="mb-3">
@@ -22,7 +22,7 @@
                     <option>selimut</option>
                     <option>bed_cover</option>
                     <option>kaos</option>
-                    <option>kain</option>
+                    <option>lain</option>
                   </select>
                 </div> 
                 <div class="mb-3">

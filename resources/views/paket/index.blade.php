@@ -1,45 +1,30 @@
 @extends('gentelella')
-
 @section('content')
-    @include('paket.modal-paket')
+@include('paket.modal-paket')
+@include('paket.import')
         <div class="card">
         <div class="card-header">
             <h3 class="card-litle">Paket</h3>
             <div class="card-tools">
             </div>
         </div>
+
+        @if(session()->has('succes'))
+			<div class="alert alert-success" id="succes-alert" role="alert">
+				{{session('succes')  }}
+			</div>
+			@endif
+
         <div class="card-body">
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MalikPaket">
                     Tambah Data Paket
                 </button>
+                <a href="Export/PaketExport" class="btn btn-success" > 
+                    <i class="">Export Excel </i>
+                </a>
+                <button class="btn btn-warning" data-target="#importExcel" data-toggle="modal">Import Excel </button>
             </div>
-            
-                {{-- <div style="margin-top:20px">
-                    @if(session('success'))
-                    <div class="alert alert-danger" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-
-                    @endif
-
-                    @if ($errors->any())
-                    <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    </div>
-                    
-                    @endif
-                </div> --}}
 
                 <br>
                 <div class="row">
@@ -89,7 +74,7 @@
                                                             <option>selimut</option>
                                                             <option>bed_cover</option>
                                                             <option>kaos</option>
-                                                            <option>kain</option>
+                                                            <option>lain</option>
                                                           </select>
                                                     </div> 
                                                     <div class="mb-3">
@@ -141,7 +126,7 @@
                                         @csrf
                                         @method('DELETE')
                                         {{-- <input type="hidden" name="_method" value="Delete"> --}}
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="delete btn btn-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>

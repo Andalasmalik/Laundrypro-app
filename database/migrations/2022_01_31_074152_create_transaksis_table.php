@@ -16,12 +16,13 @@ class CreateTransaksisTable extends Migration
         Schema::create('tb_transaksi', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('id_outlet')->index();
+            $table->foreignId('outlet_id')->index();
             $table->string('kode_invoice');
-            $table->unsignedBigInteger('id_member');
+            $table->foreignId('member_id');
             $table->date('tgl');
             $table->date('batas_waktu');
-            $table->integer('biaya_tambahan');
+            $table->double('biaya_tambahan');
+            $table->double('total');
             $table->double('diskon');
             $table->integer('pajak');
             $table->enum('status', [
@@ -30,12 +31,12 @@ class CreateTransaksisTable extends Migration
             $table->enum('pembayaran', [
                 'dibayar', 'belum_dibayar'
             ]);
-            $table->unsignedBigInteger('id_user');
+            $table->foreignId('user_id');
             $table->timestamps();
 
-            $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
-            $table->foreign('id_member')->references('id')->on('tb_member')->onDelete('cascade');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
+            // $table->foreign('id_member')->references('id')->on('tb_member')->onDelete('cascade');
+            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -16,14 +16,15 @@ class CreateDetailTransaksisTable extends Migration
         Schema::create('tb_detail_transaksi', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('id_transaksi');
-            $table->unsignedBigInteger('id_paket');
+            $table->foreignId('transaksi_id');
+            $table->foreignId('paket_id');
+            $table->double('sub_total');
             $table->double('qty');
             $table->text('keterangan');
             $table->timestamps();
 
-            $table->foreign('id_transaksi')->references('id')->on('tb_transaksi')->onDelete('cascade');
-            $table->foreign('id_paket')->references('id')->on('tb_paket')->onDelete('cascade');
+            // $table->foreign('id_transaksi')->references('id')->on('tb_transaksi')->onDelete('cascade');
+            // $table->foreign('id_paket')->references('id')->on('tb_paket')->onDelete('cascade');
         });
     }
 

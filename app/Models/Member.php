@@ -11,4 +11,10 @@ class Member extends Model
 
     protected $table = 'tb_member';
     protected $fillable = ['id', 'nama', 'alamat', 'jenis_kelamin', 'tlp'];
+
+
+    public function Penjemputan()
+    {
+        return $this->hasMany(Penjemputan::class, 'id_penjemputan');
+    }
 }

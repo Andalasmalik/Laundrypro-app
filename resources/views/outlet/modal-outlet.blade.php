@@ -1,6 +1,6 @@
 
   <!-- Modal -->
-  <div class="modal fade" id="MalikOutlet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="MalikOutlet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -26,37 +26,14 @@
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-
-        <div style="margin-top:20px">
-            @if(session('success'))
-            <div class="alert alert-danger" role="alert" id="success-alert">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-
-            @endif
-
-            @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            </div>
-            
-            @endif
-        </div>
+        <button type="submit" class="btn btn-primary">Save</button>          
         </form>
         </div>
     </div>
     </div>
 </div>
+
+
+
 
 

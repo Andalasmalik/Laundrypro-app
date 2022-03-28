@@ -3,8 +3,25 @@
 @section('content')
 
 {{-- form --}}
-<form action='pembelian' method="POST" id="formTransaksi">
+<form action='/transaksi' method="POST" id="formTransaksi">
     @csrf
+    @if($errors->any())
+		<div class="alert alert-danger" role="alert" id="error-alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
+		@if(session()->has('succes'))
+			<div class="alert alert-success" id="succes-alert" role="alert">
+				{{session('succes')  }}
+			</div>
+			@endif
     <div class="row">
         <div class="col-md-12 form-group">
            <label  for="" class="control-label col-md-6 col-sm-6 col-xs-12">Tanggal Pembelian
@@ -25,8 +42,8 @@
              <label for="" class="control-label col-md-6 col-sm-6 col-xs-12">Distributor
              </label>
              <div class="col-md-6 col-sm-12 col-xs-12">
-                 <select class="form-control col-md-12 col-xs-12" required="required" name="pemasok_id">
-                         <option value="{{ Auth::user()->outlet->id }}">{{ strtoupper(Auth::user()->outlet->nama)  }}</option>
+                 <select class="form-control col-md-12 col-xs-12" required="required" name="outlet_id">
+                         <option value="{{ Auth::user()->outlet_id }}">{{ strtoupper(Auth::user()->outlet->nama)  }}</option>
                  </select>
              </div>
          </div>
@@ -72,7 +89,7 @@
                         <tbody>
                             @foreach ($tb_member as $m )
                         <tr>
-                            <td>{{ $loop->iteration }}<input type="hidden"  class="idBarang" value="{{ $m->id }}"></td>
+                            <td>{{ $loop->iteration }}<input type="hidden"  name="idMember" value="{{ $m->id }}"></td>
                             <td>{{$m->nama}}</td>
                             {{-- <td>{{$m->produk_id}}</td> --}}
                             <td>{{$m->alamat}}</td>
@@ -103,6 +120,7 @@
          <div class="data-pelanggan">
              <table class="table table-bordered">
                 <tr>
+                    <input type="hidden" name="member_id">
                     <td width="10%" class="table-primary" scope="row">Nama</td>
                     <td width="25%"><input type="text" name="nama" readonly id="v-nama" style="border:none"></td>
                     <td width="10%" class="table-primary">Jenis Kelamin</td>
@@ -254,7 +272,7 @@
       data += '<td>'+jenis+'</td>';
       data += '<td>'+nama_paket+'</td>';
       data += '<td>'+harga+'</td>';
-      data += '<input type="hidden" name="barang_id[]" value="'+idBarang+'">';
+      data += '<input type="hidden" name="paket_id[]" value="'+idBarang+'">';
       data += '<input type="hidden" name="harga_beli[]" value="'+harga+'">';
       // data += '<input type="hidden" name="sub_total[]" value="'+harga*parseInt($('#qty_barang').val())+'">';
       data += '<td><input type="number" value="1" min="1" class="qty form-control" name="qty[]"></td>';
@@ -311,12 +329,15 @@ $(function(){
             $('#tblMember2').DataTable();
           $('#tblMember2').on('click', '.pilihMember', function(){
                 let ele = $(this).closest('tr');
+                let id = ele.find('input[name=idMember]').val();
                 let nama = ele.find('td:eq(1)').text();
                 let alamat = ele.find('td:eq(2)').text();
                 let jenis_kelamin = ele.find('td:eq(3)').text();
                 let tlp = ele.find('td:eq(4)').text();
+
                 $('#v-nama').val(nama);
                 $('#v-alamat').text(alamat);
+                $('input[name=member_id]').val(id)
                 $('#v-jenis_kelamin').text(jenis_kelamin);
                 $('#v-tlp').text(tlp)
                 $('#tblMember').modal('hide');

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outlet;
+use App\Exports\OutletExport;
+use App\Imports\OutletImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+// use Barryvdh\DomPDF\PDF;
+use PDF;
 
 class OutletController extends Controller
 {
@@ -45,7 +50,7 @@ class OutletController extends Controller
         
            $input = Outlet::create($validated);
     
-          if($input) return redirect('outlet')->with('susces', 'Data berhasil diinput');
+          if($input) return redirect('outlet')->with('succes', 'Data berhasil diinput');
     }
 
     /**
@@ -90,7 +95,7 @@ class OutletController extends Controller
             $input = Outlet::where('id', $id)
                     ->update($validated);
                     
-            if($input) return redirect('outlet')->with('susces', 'Data berhasil diinput');
+            if($input) return redirect('outlet')->with('succes', 'Data berhasil diinput');
     }
 
     /**
@@ -103,6 +108,50 @@ class OutletController extends Controller
     {
         Outlet::destroy($Outlet);
 
-        return redirect('/outlet');
+        return redirect('/outlet')->with('succes', 'Data berhasil dihapus');
     }
+
+    public function exportData(){
+
+        return Excel::download(new OutletExport, 'Outlet.xlsx');
+
+    }
+
+    public function importData(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('file_siswa',$nama_file);
+ 
+		// import data
+		Excel::import(new OutletImport, public_path('/file_siswa/'.$nama_file));
+ 
+		// notifikasi dengan session
+		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		return redirect('/outlet')->with('succes', 'Data berhasil diimport');
+	}
+
+    public function exportPDF(Outlet $outlet) {
+       
+        // $outlet = ;
+  
+        $pdf = PDF::loadView('outlet.pdf', [
+            'tb_outlet' => Outlet::all()
+        ]);
+        
+        return $pdf->stream();
+        
+      }
 }

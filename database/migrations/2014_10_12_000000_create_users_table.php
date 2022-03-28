@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateUsersTable extends Migration
 {
     /**
+     * untuk mendeklarasikan dan membuat table user ke database
      * Run the migrations.
      *
      * @return void
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration
 
     /**
      * Reverse the migrations.
+     * untuk melakukan rollback agar datanya ikut kembali seperti semula
      *
      * @return void
      */

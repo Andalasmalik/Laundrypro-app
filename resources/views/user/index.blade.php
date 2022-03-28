@@ -120,7 +120,7 @@
                                     @csrf
                                     @method('DELETE')
                                     {{-- <input type="hidden" name="_method" value="Delete"> --}}
-                                    <button type="submit" class="btn delete-outlet btn-danger">Delete</button>
+                                    <button type="submit" class="delete btn btn-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>

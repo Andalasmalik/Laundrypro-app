@@ -17,18 +17,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Paket::factory(6)->create();
-        // Member::factory(6)->create();
-        // Outlet::factory(6)->create();
+        // Paket::factory(10)->create();
+        Member::factory(10)->create();
+        Outlet::factory(10)->create();
         // //   \App\Models\User::factory(10)->create();
         
-        // User::create([
-        //     'nama'=>'Malik',
-        //     'email'=>'andalas@gmail.com',
-        //     'password'=>bcrypt('malik12333'),
-        //     'outlet_id'=> 1,
-        //     'role'=>'admin'
-        // ]);
+        User::create([
+            'nama'=>'Malik',
+            'email'=>'malik@gmail.com',
+            'password'=>bcrypt('andalas123'),
+            'outlet_id'=> 1,
+            'role'=>'admin'
+        ]);
         
     }
 }
