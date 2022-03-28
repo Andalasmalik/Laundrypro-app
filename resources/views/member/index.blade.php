@@ -61,7 +61,17 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{$m->nama}}</td>
                                     <td>{{$m->alamat}}</td>
-                                    <td>{{$m->jenis_kelamin}}</td>
+                                    <td>@switch($m->jenis_kelamin)
+                                        @case('L')
+                                            <span>Laki-laki</span>
+                                            @break
+                                        @case('P')
+                                            <span>Perempuan</span>
+                                            @break
+                                        @default
+                                            
+                                        @endswitch
+                                    </td>
                                     <td>{{$m->tlp}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $m->id }}">

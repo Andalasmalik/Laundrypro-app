@@ -13,7 +13,7 @@
         </li>
         <li><a><i class="fa fa-edit"></i> Transaksi <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-            <li><a href="/transaksi">HEHEHEHE</a></li>
+            <li><a href="/transaksi">  Transaksi </a></li>
             </ul>
         </li>
         

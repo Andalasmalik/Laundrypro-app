@@ -38,7 +38,7 @@ class PaketController extends Controller
     public function store(Request $request)
     {
         $validated = $request ->validate([
-            'id_outlet' => 'required',
+            'outlet_id' => 'required',
             'jenis' => 'required',
             'nama_paket' => 'required',
             'harga'=> 'required'
@@ -83,7 +83,7 @@ class PaketController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request ->validate([
-            'id_outlet' => 'required',
+            'outlet_id' => 'required',
             'jenis' => 'required',
             'nama_paket' => 'required',
             'harga' => 'required'
